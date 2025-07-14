@@ -4,6 +4,8 @@ import Header from "./components/Header"
 import Footer from "./components/Footer";
 import CategoryListing from "./pages/CategoryListing"
 import PhotographerProfile from "./pages/PhotographerProfile";
+import About from "./About/About";
+import Contact from "./Contact/Contact";
 import "./App.css";
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
           <Routes>
             <Route path="/" element={<CategoryListing />} />
             <Route path="/photographer/:id" element={<PhotographerProfile />} />
+              <Route path="/about" element={<About />} />
+               <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />

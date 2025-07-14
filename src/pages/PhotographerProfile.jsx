@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./PhotographerProfile.css";
+import "../db.json"
 
 const PhotographerProfile = () => {
   const { id } = useParams();
@@ -21,23 +22,32 @@ const PhotographerProfile = () => {
     useEffect(() => {
     fetchPhotographer();
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+ 
 
-    const fetchPhotographer = async () => {
-    try {
-      const response = await fetch(`/photographers/${id}`);
-      if (response.ok) {
-        const data = await response.json();
-        setPhotographer(data);
+
+  const fetchPhotographer = async () => {
+  try {
+    const response = await fetch(`/db/${id}`);
+    if (response.ok) {
+      const data = await response.json();
+      const found = data.find((item) => item.id === Number(id));
+      if (found) {
+        setPhotographer(found);
       } else {
         navigate("/");
       }
-    } catch (error) {
-      console.error("Error fetching photographer:", error);
+    } else {
       navigate("/");
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Error fetching photographer:", error);
+    navigate("/");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   const handleInquiryChange = (e) => {
     setInquiry({

@@ -1,0 +1,24 @@
+/* src/styles/About.css */
+.about-page {
+  padding: 40px 20px;
+  background-color: #fdfdfd;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-container h1 {
+  font-size: 2.5rem;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 15px;
+}

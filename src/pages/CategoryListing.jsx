@@ -5,7 +5,7 @@ import PhotographerCard from "../components/PhotographerCard";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton"
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader"
 import "./CategoryListing.css"
-// import "../db.json";
+import "../db.json"
 
 const CategoryListing = () => {
   const [photographers, setPhotographers] = useState([]);
@@ -33,49 +33,23 @@ const CategoryListing = () => {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
-  // Fetch photographers from API
-  // useEffect(() => {
-  //   const fetchPhotographers = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await fetch("/public/db.js");
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch photographers");
-  //       }
-  //       const data = await response.json();
-  //       setPhotographers(data);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
 
-  //   fetchPhotographers();
-  // }, []);
+    useEffect(() => {
+    fetch("/db")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setPhotographers(data);
+      })
+      .catch((err) => {
+        console.error("Fetch error:", err);
+      });
+  }, []);
 
-
-  useEffect(() => {
-  const fetchPhotographers = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/public/db.json"); 
-      if (!response.ok) throw new Error("Failed to fetch data");
-      const data = await response.json();
-      setPhotographers(data.photographers); 
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchPhotographers();
-}, []);
-
-// const response = await fetch("/src/db.json");
-// const data = await response.json();
-// setPhotographers(data.photographers);
 
 
   // Filter and sort photographers
